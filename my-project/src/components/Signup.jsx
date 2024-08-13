@@ -1,9 +1,12 @@
 import React from 'react'
 
-const Signup = () => {
-  return (
-    <div>Signup</div>
+function Login() {
+  return(
+    <>
+    <section>
+      
+    </section>
+    </>
   )
 }
-
 export default Signup
