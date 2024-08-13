@@ -1,5 +1,7 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
 export function SignUp() {
   const [RegisterData, SetRegisterData] = useState({
     userName: "",
@@ -17,12 +19,12 @@ export function SignUp() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    console.log(RegisterData);
 
     axios
-      .post(`${apiUrl}`, RegisterData)
+      .post(`${url}/register`, RegisterData)
       .then((res) => console.log(res.data))
-      .catch((err) => console.log("error Registering"))
+      .catch((err) => console.log("error Registering"));
   };
   return (
     <>
@@ -32,7 +34,7 @@ export function SignUp() {
             <h1 className="text-4xl font-bold text-center text-white mb-6">
               Register
             </h1>
-            <form onSubmit={handleSubmit} className="">
+            <form className="">
               <div className="relative mb-6">
                 <input
                   type="text"
@@ -40,12 +42,13 @@ export function SignUp() {
                   id="username"
                   value={RegisterData.userName}
                   onChange={handleChange}
+                  required
                   className="block w-72 py-2.5 px-0 text-sm text-white bg-transparent border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer"
                   placeholder=" "
                 />
                 <label
                   htmlFor="username"
-                  className="absolute text-sm text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] left-0 peer-focus:left-0 peer-focus:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-gray-400 peer-focus:scale-75 peer-focus:-translate-y-6"
+                  className="absolute text-sm text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] left-0 peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-gray-400 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Username
                 </label>
@@ -57,29 +60,31 @@ export function SignUp() {
                   id="email"
                   value={RegisterData.email}
                   onChange={handleChange}
+                  required
                   className="block w-72 py-2.5 px-0 text-sm text-white bg-transparent border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer"
                   placeholder=" "
                 />
                 <label
-                  htmlFor="username"
-                  className="absolute text-sm text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] left-0 peer-focus:left-0 peer-focus:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-gray-400 peer-focus:scale-75 peer-focus:-translate-y-6"
+                  htmlFor="email"
+                  className="absolute text-sm text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] left-0 peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-gray-400 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
-                  Email
+                  Email:
                 </label>
               </div>
               <div className="relative mb-6">
                 <input
                   type="text"
-                  name="username"
-                  id="username"
+                  name="phoneNumber"
+                  id="phonenumber"
                   value={RegisterData.phoneNumber}
                   onChange={handleChange}
+                  required
                   className="block w-72 py-2.5 px-0 text-sm text-white bg-transparent border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer"
                   placeholder=" "
                 />
                 <label
-                  htmlFor="username"
-                  className="absolute text-sm text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] left-0 peer-focus:left-0 peer-focus:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-gray-400 peer-focus:scale-75 peer-focus:-translate-y-6"
+                  htmlFor="phonenumber"
+                  className="absolute text-sm text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] left-0 peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-gray-400 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Phone Number
                 </label>
@@ -91,20 +96,22 @@ export function SignUp() {
                   id="password"
                   value={RegisterData.password}
                   onChange={handleChange}
+                  required
                   className="block w-72 py-2.5 px-0 text-sm text-white bg-transparent border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer"
                   placeholder=" "
                 />
                 <label
                   htmlFor="password"
-                  className="absolute text-sm text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] left-0 peer-focus:left-0 peer-focus:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-gray-400 peer-focus:scale-75 peer-focus:-translate-y-6"
+                  className="absolute text-sm text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] left-0 peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-gray-400 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Password
                 </label>
               </div>
-              <Link>
+              <Link to="/">
                 {" "}
                 <button
                   type="submit"
+                  onClick={handleSubmit}
                   className="w-full text-[18px] text-white rounded bg-blue-500 py-2 hover:bg-blue-600 transition-colors duration-300"
                 >
                   Register
